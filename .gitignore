@@ -1,19 +1,19 @@
-# Logs
+# Arquivos de log
 logs
 *.log
-npm-degub.log*
+npm-debug.log*
 
-# Runtime data
+# Dados de tempo de execução
 pids
 *.pid
-*.sead
+*.seed
 
-# Dependency directories
+# Diretórios de dependências
 node_modules/
 
-# Build files
+# Arquivos de build
 dist/
 build/
 
-# Enviroment variabels
+# Variáveis de ambiente
 .env

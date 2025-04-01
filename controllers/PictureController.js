@@ -37,7 +37,7 @@ exports.findAll = async (req, res) => {
     const pictures = await Picture.find();
 
     // Retorna todas as imagens do DB
-    res.json(pictures);
+    res.json({ pictures, msg: "Imagens buscadas com sucesso!" });
   } catch (err) {
     // Em caso de erro, retorna uma resposta de erro com código 500
     res.status(500).json({ message: "Erro ao buscar imagens!" });
@@ -52,12 +52,15 @@ exports.remove = async (req, res) => {
       return res.status(404).json({ message: "Imagem não encontrada!" });
     }
 
+    // Remove o arquivo do sistema de arquivos
     fs.unlinkSync(picture.src);
 
-    await picture.remove();
+    // Remove o documento do banco de dados
+    await Picture.deleteOne({ _id: req.params.id });
 
-    res.json({ message: "Imagem removida!" });
+    res.json({ message: "Imagem removida com sucesso!" });
   } catch (error) {
+    console.error(error); // Para ver erros no console
     res.status(500).json({ message: "Erro ao excluir imagem!" });
   }
 };
