@@ -17,7 +17,7 @@ router.post("/", upload.single("file"), PictureController.create);
 router.get("/", PictureController.findAll);
 
 // Definindo a Rota DELETE para apagar imagens
-router.delete(":id", PictureController.remove);
+router.delete("/:id", PictureController.remove);
 
 // Exportando o arquivo para utilizar no app.js
 module.exports = router;

@@ -24,7 +24,7 @@ exports.create = async (req, res) => {
 
     // Retorna a resposta com a img. e uma msg. de sucesso
     res.json({ picture, msg: "Imagem salva com sucesso!" });
-  } catch (error) {
+  } catch (err) {
     // Em caso de erro, retorna uma msg. com erro 500
     res.status(500).json({ message: "Erro ao salvar imagem!" });
   }
