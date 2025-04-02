@@ -16,6 +16,9 @@ router.post("/", upload.single("file"), PictureController.create);
 // Definindo a rota GET para buscar todas as imagens do DB
 router.get("/", PictureController.findAll);
 
+// Definindo a rota GET para obter uma img. especifica
+router.get("/:id/image", PictureController.getImage);
+
 // Definindo a Rota DELETE para apagar imagens
 router.delete("/:id", PictureController.remove);
 

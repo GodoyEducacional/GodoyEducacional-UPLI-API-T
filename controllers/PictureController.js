@@ -1,9 +1,6 @@
 // Importa o models Picture para interagir com o DB
 const Picture = require("../models/Picture");
 
-// Importa o módulo fs para interagir com o sistema de arquivos
-const fs = require("fs");
-
 // Função para criar uma nova imagem no banco de dados
 exports.create = async (req, res) => {
   try {
@@ -13,10 +10,11 @@ exports.create = async (req, res) => {
     // Obtém o arquivo da req. (Usado pelo Multer para fazer o Upload)
     const file = req.file;
 
-    // Cria uma nova instância com nome e caminho do arquivo
+    // Cria uma nova instância com nome  e imagem
     const picture = new Picture({
       name,
-      src: file.path,
+      image: file.buffer,
+      contentType: file.mimetype,
     });
 
     // Salva a imagem no DB
@@ -44,6 +42,28 @@ exports.findAll = async (req, res) => {
   }
 };
 
+// Função para obter somente uma imagem especifica
+exports.getImage = async (req, res) => {
+  try {
+    // Buscando a img. pelo ID fornececido pelo DB
+    const picture = await Picture.findById(req.params.id);
+
+    // Se a img. não foi encontrada, retorna uma erro 404
+    if (!picture) {
+      return res.status(404).json({ message: "Imagem não encontrada" });
+    }
+
+    // Define o tipo da resposta para o tipo da imagem
+    res.set("Content-Type", picture.contentType);
+
+    // Mostra a imagem na resposta
+    res.send(picture.image);
+  } catch (error) {
+    // Caso ocorra erro, retorna para o usuario
+    res.status(500).json({ message: "Erro ao buscar imagem!" });
+  }
+};
+
 // Função para remover uma imagem do DB e local
 exports.remove = async (req, res) => {
   try {
@@ -54,9 +74,6 @@ exports.remove = async (req, res) => {
     if (!picture) {
       return res.status(404).json({ message: "Imagem não encontrada!" });
     }
-
-    // Remove o arquivo localmente (Uploads)
-    fs.unlinkSync(picture.src);
 
     // Remove o a imagem do DB
     await Picture.deleteOne({ _id: req.params.id });
