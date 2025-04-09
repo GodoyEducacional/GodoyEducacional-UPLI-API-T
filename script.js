@@ -3,7 +3,7 @@ const elements = {
   photoGrid: document.getElementById("photoGrid"),
   uploadModal: document.getElementById("uploadModal"),
   addPhotoButton: document.getElementById("addPhotoBtn"),
-  closeButton: document.getElementById(".close"),
+  closeButton: document.querySelector(".close"),
   uploadForm: document.getElementById("uploadForm"),
   toast: document.getElementById("toast"),
   nameInput: document.getElementById("name"),
@@ -63,7 +63,7 @@ function createPhotoCardElement(photo) {
 
   card.innerHTML = `
          <img src="${imageUrl}" alt="${photo.name}"
-              onerror="this.onerror-null; this.src='${config.placeholderImage}'">
+              onerror="this.onerror=null; this.src='${config.placeholderImage}'">
          <div class="photo-info">
              <div class="photo-name">${photo.name}</div>
          </div>
