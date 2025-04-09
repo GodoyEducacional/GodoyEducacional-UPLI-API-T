@@ -8,10 +8,10 @@ const Schema = mongoose.Schema;
 const PictureSchema = new Schema({
   // Campo do tipo String e obrigatório
   name: { type: String, required: true },
-  // Amarzenar a imagem como Buffer
-  imagem: { type: Buffer, required: true },
-  // Campo amarzenar o tipo da imagem
-  contentType: { type: String, required: true },
+  // Campo para armazenar a imagem como Buffer
+  image: { type: Buffer, required: true },
+  // Campo para armazenar o tipo de conteúdo da imagem
+  contentType: { type: String, required: true }
 });
 
 // Criando o modelo 'Picture' a partir do esquema criado antes

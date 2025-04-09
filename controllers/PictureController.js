@@ -65,23 +65,23 @@ exports.getImage = async (req, res) => {
 };
 
 // Função para remover uma imagem do DB e local
-exports.remove = async (req, res) => {
-  try {
-    // Busca a imagem no DB, com a ID enviada
-    const picture = await Picture.findById(req.params.id);
+// exports.remove = async (req, res) => {
+//   try {
+//     // Busca a imagem no DB, com a ID enviada
+//     const picture = await Picture.findById(req.params.id);
 
-    // Se a img. não for encontrada no DB
-    if (!picture) {
-      return res.status(404).json({ message: "Imagem não encontrada!" });
-    }
+//     // Se a img. não for encontrada no DB
+//     if (!picture) {
+//       return res.status(404).json({ message: "Imagem não encontrada!" });
+//     }
 
-    // Remove o a imagem do DB
-    await Picture.deleteOne({ _id: req.params.id });
+//     // Remove o a imagem do DB
+//     await Picture.deleteOne({ _id: req.params.id });
 
-    // Retorna uma resposta ao Usuario
-    res.json({ message: "Imagem removida com sucesso!" });
-  } catch (error) {
-    // Retorna erro se houver algum problema
-    res.status(500).json({ message: "Erro ao excluir imagem!" });
-  }
-};
+//     // Retorna uma resposta ao Usuario
+//     res.json({ message: "Imagem removida com sucesso!" });
+//   } catch (error) {
+//     // Retorna erro se houver algum problema
+//     res.status(500).json({ message: "Erro ao excluir imagem!" });
+//   }
+// };
