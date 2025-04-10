@@ -37,7 +37,7 @@ async function fetchPhotos() {
     const response = await fetch(config.apiUrl);
 
     // Se a resposta não foi completa, mostra um erro
-    if (response.ok) {
+    if (!response.ok) {
       throw new Error(`Erro na requisição: ${response.status}`);
     }
 
